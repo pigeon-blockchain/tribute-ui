@@ -28,7 +28,7 @@ export default function MemberProfile() {
   const {defaultChainError} = useIsDefaultChain();
   const {account} = useWeb3Modal();
   const {daoTokenDetails, daoTokenDetailsStatus} = useDaoTokenDetails();
-  const {totalUnits, totalUnitsStatus} = useDaoTotalUnits();
+  const {totalUnitsIssued, totalUnitsStatus} = useDaoTotalUnits();
 
   /**
    * Their hooks
@@ -82,8 +82,8 @@ export default function MemberProfile() {
       ? true
       : false;
   const votingWeight =
-    memberDetails && typeof totalUnits === 'number'
-      ? ((Number(memberDetails.units) / totalUnits) * 100).toFixed(2)
+    memberDetails && typeof totalUnitsIssued === 'number'
+      ? ((Number(memberDetails.units) / totalUnitsIssued) * 100).toFixed(2)
       : '';
 
   /**
