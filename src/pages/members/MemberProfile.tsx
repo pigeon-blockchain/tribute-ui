@@ -1,6 +1,8 @@
 import {useEffect, useState} from 'react';
+import {useSelector} from 'react-redux';
 import {useHistory, useParams} from 'react-router-dom';
 
+import {StoreState} from '../../store/types';
 import {AsyncStatus} from '../../util/types';
 import {Member} from './types';
 import {
@@ -20,6 +22,14 @@ import {useDaoTotalUnits} from '../../hooks';
 import Delegation from './Delegation';
 
 export default function MemberProfile() {
+  /**
+   * Selectors
+   */
+
+  const ERC20ExtensionContract = useSelector(
+    (state: StoreState) => state.contracts?.ERC20ExtensionContract
+  );
+
   /**
    * Our hooks
    */
@@ -69,7 +79,7 @@ export default function MemberProfile() {
   const isLoading: boolean =
     membersStatus === AsyncStatus.STANDBY ||
     membersStatus === AsyncStatus.PENDING ||
-    daoTokenDetailsStatus === AsyncStatus.STANDBY ||
+    (ERC20ExtensionContract && daoTokenDetailsStatus === AsyncStatus.STANDBY) ||
     daoTokenDetailsStatus === AsyncStatus.PENDING ||
     totalUnitsStatus === AsyncStatus.STANDBY ||
     totalUnitsStatus === AsyncStatus.PENDING;
