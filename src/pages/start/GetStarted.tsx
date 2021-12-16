@@ -66,7 +66,7 @@ export default function GetStarted() {
 
           <div className="landing">
             <div className="landing__subtitle">
-              A next generation DAO framework
+              DAO for the next generation blockchain
             </div>
 
             <div className="landing__img">
